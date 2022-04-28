@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" />
+ <link rel="stylesheet" href=" https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+ <link rel="stylesheet" href=" https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css" />
+  <!-- Popup Modal -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://ltschool.web.app/css/Bootstrapcolor.css" rel="stylesheet" type="text/css">
+  
+  <style>
+    body {
+      font-family: "Prompt", sans-serif;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-12" id="form1">
+        <nav class="navbar navbar-expand-lg navbar-light bd-green-500 my-3">
+          <div class="container-fluid">
+            <a class="navbar-brand  text-white"><i class="fas fa-user"></i> OPREK</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+           <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                <!--  <button type="botton" class="btn btn-light" onclick="goback()" id="goback"><i class="fas fa-cloud-upload-alt"></i> Kirim BAP</button>-->
+                </li>
+              </ul>           
+            </div>
+          </div>
+        </nav>        
+        <center>
+                  <button type="botton" class="btn btn-danger" onclick="goback()" id="goback"><i class="fas fa-cloud-upload-alt"></i> Kirim BAP EMIS</button> <br/> <br/>
+                              
+          <span id="resp-spinner5" class="spinner-grow spinner-grow-sm text-danger d-none" role="status" aria-hidden="true"></span>
+          <span id="resp-spinner6" class="spinner-grow spinner-grow-sm text-warning d-none" role="status" aria-hidden="true"></span>
+          <span id="resp-spinner7" class="spinner-grow spinner-grow-sm text-ligth d-none" role="status" aria-hidden="true"></span>
+          <span id="resp-spinner8" class="spinner-grow spinner-grow-sm text-info d-none" role="status" aria-hidden="true"></span>
+          <span id="resp-spinner9" class="spinner-grow spinner-grow-sm text-primary d-none" role="status" aria-hidden="true"></span>
+          <span id="resp-spinner10" class="spinner-grow spinner-grow-sm text-dark d-none" role="status" aria-hidden="true"></span>
+        </center>
+        <table id="data-table" class="table table-striped dt-responsive nowrap" style="width:100%">
+          <thead class="bd-green-500"></thead>
+        </table>
+      </div>
+    </div>
+  </div>
+
+ <div class="col" id="form2" style="display : none">
+   <?!= include('index'); ?>
+ </div>
+
+  <script>  
+    $(window).on('load',function(){
+    $('#form2').hide()
+  })
+       google.script.run.withSuccessHandler(showTable).getData();
+      document.getElementById('resp-spinner5').classList.remove("d-none");
+      document.getElementById('resp-spinner6').classList.remove("d-none");
+      document.getElementById('resp-spinner7').classList.remove("d-none");
+      document.getElementById('resp-spinner8').classList.remove("d-none");
+      document.getElementById('resp-spinner9').classList.remove("d-none");
+      document.getElementById('resp-spinner10').classList.remove("d-none");
+
+  function showTable(dataArray) {
+      $(document).ready(function(){
+     // $.LoadingOverlay("hide");  
+      document.getElementById('resp-spinner5').classList.add("d-none");
+      document.getElementById('resp-spinner6').classList.add("d-none");
+      document.getElementById('resp-spinner7').classList.add("d-none");
+      document.getElementById('resp-spinner8').classList.add("d-none");
+      document.getElementById('resp-spinner9').classList.add("d-none");
+      document.getElementById('resp-spinner10').classList.add("d-none");  
+      $('#data-table').DataTable({
+    //data: dataArray,
+      data: dataArray.slice(1),
+     columns: [
+      { title: "Jenjang" }, 
+      { title: "Nama Lembaga" }, 
+      { title: "NSM" },
+      { title: "Status" },
+      { title: "Tgl BAP" },
+      { title: "Email" }, 
+      { title: " Telp Kamad" }, 
+      { title: "Akreditasi" },
+      { title: " Predikat" },
+      { title: "Waktu" },
+      { title: "Alamat" }, 
+       { title: "Kecamatan" }, 
+       { title: "Kelurahan" },
+       { title: "Kode Pos" },  
+      { title: " Tgl Kirim" }, 
+      {
+          title: "File Download",
+          render: function (data, type, row, meta) {   
+            if (type === "display") {
+           data ='  <a target="_blank" href="' + data + '" class="p-2 mb-2 bd-orange-500 text-white"><i class="fas fa-download"></i> Download File</a>';
+           
+           }
+            return data;
+          },
+        },
+      ],
+
+      "ordering": false,
+       destroy:true,   
+       //pageLength: 10,   
+       lengthMenu: [
+          [10, '50','100',  -1 ],
+          ['10','50','100','All' ]
+      ],
+      // Filter Data
+      order: [[2, "asc"], [2, "asc"], ],
+      language: {
+      sProcessing: "Processing...",
+      sLengthMenu: "_MENU_ ",
+      sZeroRecords: "Record Not Found",
+      sInfo: '<i class="fas fa-angle-double-left"></i> halaman _START_ Menampilkan _END_ dari _TOTAL_ <i class="fas fa-angle-double-right"></i>',
+      sInfoEmpty: "data 0 menampilkan 0 dari 0 data",
+      sInfoFiltered: "(Total _MAX_ Total)",
+      sInfoPostFix: "",
+      sSearch: '<i class="fas fa-search" fa-2x></i> Search Data:',
+      sUrl: "",
+      oPaginate: {
+        sFirst: "First",
+        sPrevious: '<i class="fas fa-chevron-left fa-lg" ></i>',
+        sNext: '<i class="fas fa-chevron-right fa-lg" ></i>',
+        sLast: "Last"
+      }    
+    },
+      });
+    });
+  }
+function goback(){
+ $.LoadingOverlay("show", {image:"",fontawesome:"fa fa-cog fa-spin fa-xs"}); 
+  $('#form2').show()
+  $('#form1').hide()
+  $.LoadingOverlay("hide");  
+}
+  </script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+</body>
+
+</html>
