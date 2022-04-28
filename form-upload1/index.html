@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400&display=swap" rel="stylesheet">
+    <link href="https://ltschool.web.app/css/Bootstrapcolor.css" rel="stylesheet" type="text/css">
+  <style>
+    body {
+      font-family: 'Prompt';
+       font-size: 14px;
+    }
+
+    .form-control:focus {
+      border-color: #6265e4 !important;
+      box-shadow: 0 0 5px rgba(98, 101, 228, 1) !important;
+    }
+  </style>
+</head>
+
+<body>
+   <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card"><br>
+            <center><h6>Setelah klik submit disilahkan untuk menunggu<br>hingga data lembaga Anda ditampilkan pada tabel.</h6></center>
+          <div class="card-header h5 bg-primary text-white text-center">
+            <i class="fas fa-sign-in-alt"></i> Welcome to Form</div>  
+            <button type="botton" class="btn btn-warning" onclick="godatatable()"><i class="fas fa-table"></i> Lihat Tabel</button>
+          <div class="card-body">
+            <!-- <h5 class="card-title text-center"><i class="fas fa-thumbs-up"></i> ..123456</h5> -->
+            <div class="container">
+              <div class="bg-white">
+                <!-- <div class="row"> -->
+
+                <div class="col-md-12">
+                  <!-- -------------------------------Jenjang------------------------------------------ -->
+                  <form id="myForm" onsubmit="submitForm()">
+                    <!-- <p class="h3 mb-4 text-center"><i class="fas fa-chalkboard-teacher"></i> Welcome to Form</p> -->
+                    <div class="row mb-2">
+                      <div class="form-group col-md-12">
+                        <label for="inputnick"><i class="fas fa-chart-line"></i> Jenjang</label>
+                        <select id="data0" class="form-control" required>
+                            <option selected disabled value="">Pilih...</option>
+                            <option value="RA">RA</option>
+                            <option value="MI">MI</option>
+                            <option value="MTs">MTs</option>
+                            <option value="MA">MA</option>
+                            
+                          </select>
+                      </div>
+                      <!-- -------------------------------Nama Lembaga & NSM---------------------------------------- -->
+                      <!-- <div class="row  my-3"> -->
+                      <div class="form-group col-md-12">
+                        <label for="first_name"><i class="fas fa-warehouse"></i></i> Nama Lembaga</label>
+                        <input type="text" class="form-control"  id="data1"  placeholder="Nama Lembaga" required>
+                      </div>
+                      <div class="form-group col-md-12">
+                        <label for="last_name"><i class="fas fa-sort-numeric-up"></i></i> NSM</label>
+                        <input type="text" minlength="12" maxlength="12" class="form-control" id="data2" placeholder="NSM" required>
+                      </div>
+                    </div>
+                    <!-- -------------------------------Status------------------------------------------ -->
+                    <div class="row  mb-2">
+                      <div class="form-group col-md-6">
+                        <p><i class="fas fa-lightbulb"></i> Status</p>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="data3" id="id1"  value="Negeri" required>
+                          <label class="form-check-label" for="male">Negeri</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="data3" id="id2" value="Swasta" required>
+                          <label class="form-check-label" for="female">Swasta</label>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="dateOfBirth"><i class="fas fa-birthday-cake"></i> Tgl Selesai BAP</label>
+                        <input type="date" class="form-control"  id="data4" required>
+                      </div>
+                    </div>
+                    <!-- -------------------------------Email + Mobile No------------------------------------------ -->
+                    <div class="row  mb-2">
+                      <div class="form-group col-md-12">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" class="form-control"  id="data5" placeholder="Email" required>
+                      </div>
+                     <div class="form-group col-md-12">
+                        <label for="phone"><i class="fas fa-mobile-alt"></i> No Telp Kamad</label>
+                        <input type="text" minlength="12" maxlength="12" class="form-control"  id="data6" placeholder="No Telp Kamad" required>
+                      </div>
+                    </div>
+                    <!-- -------------------------------Akreditasi------------------------------------------ -->
+                    <div class="form-group mb-2">
+                      <label for="color"><i class="fas fa-book-reader"></i> Akreditasi</label>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="data7" type="checkbox" id="id1" value="Sudah" required>
+                        <label class="form-check-label" for="inlineCheckbox1">Sudah</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="data7" type="checkbox" id="id2" value="Belum" required>
+                        <label class="form-check-label" for="inlineCheckbox2">Belum</label>
+                      </div>
+                    </div>
+                    <!-- -------------------------------Predikat Akreditasi--------------------------------------- -->
+                    <div class="row mb-2">
+                      <div class="form-group col-md-6">
+                        <label for="inputBlood"><i class="fas fa-file-edit"></i> Predikat Akreditasi</label>
+                        <select id="data8" class="form-control" required>
+                            <option selected disabled value="">Pilih..</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="-">-</option>
+                          </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="education"><i class="fas fa-user-graduate"></i> Waktu KBM</label>
+                        <input class="form-control" list="datalistOptions" id="data9" placeholder="Pagi/ siang/ pagi & siang">
+                        <datalist id="datalistOptions">
+                          <option value="Pagi">
+                          <option value="Siang">
+                          <option value="Pagi & Siang">
+                        </datalist>
+                      </div>
+                    </div>
+                    <!-- -------------------------------Address------------------------------------------ -->
+                    <div class="row mb-2">
+                    <div class="form-group mb-2">
+                      <label for="address"><i class="fas fa-address-card"></i> Alamat</label>
+                      <textarea class="form-control" rows="3" id="data10" placeholder="Alamat Lembaga" required></textarea>
+                    </div>
+                    <div class="row mb-2">
+                    <div class="form-group col-md-12">
+                        <label for="kec"><i class="fas fa-map"></i> Kecamatan</label>
+                        <input type="text" class="form-control"  id="data11"  placeholder="kecamatan" required>
+                      </div>
+                      <div class="row mb-2">
+                    <div class="form-group col-md-12">
+                        <label for="kel"><i class="fas fa-location"></i> Kelurahan</label>
+                        <input type="text" class="form-control"  id="data12"  placeholder="Kelurahan" required>
+                      </div>
+                      <div class="row mb-2">
+                    <div class="form-group col-md-12">
+                        <label for="kp"><i class="fas fa-list-ol"></i> Kode Pos</label>
+                        <input type="text" minlength="5" maxlength="5" class="form-control"  id="data13"  placeholder="kode pos" required>
+                      </div>
+                    <!-- -------------------------------File Select------------------------------------------ -->
+                      <div class="form-group col-md-12 mb-2">
+                        <label for="formFile" class="form-label"><i class="fas fa-upload"></i> Kirim BAP EMIS</label>
+                        <input class="form-control" type="file" name="uploadfile" id="file">
+                      </div>
+                      </div>
+                    <!-- -------------------------------Submit------------------------------------------ -->
+                    <div class="form-group text-center mb-2 mx-auto">
+                      <button type="submit" class="btn btn-primary" id="btn1"><i class="fas fa-cloud-upload-alt"></i> Kirim</button>
+                      <button class="btn btn-primary" id="btn2" type="button" disabled style="display : none">
+                        <span class="spinner-grow spinner-grow-sm" role="status" ></span>
+                        Processing Submit...
+                      </button>
+                    </div>
+                  </form>
+                  <!-- -------------------------------Footer------------------------------------------ -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer bg-primary  text-center text-white"><i class="fa-solid fa-heart"></i>
+            Pendma Kota Surabaya
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- -------------------------------JAVASCRIPT------------------------------------------ -->
+  <script>
+  //    $(window).on('load',function(){
+  //   $('#form2').hide()
+  // })
+    var fileUploader = document.getElementById("file");
+      function submitForm(obj) { 
+        event.preventDefault();
+        $('#btn1').hide()
+        $('#btn2').show()
+
+        var obj = {}
+        obj.data0 = $('#data0').val()
+        obj.data1 = $('#data1').val()
+        obj.data2 = $('#data2').val()
+        obj.data3 = $('input[name="data3"]:checked').val()// Checkbox radiobox
+        obj.data4 = $('#data4').val()
+        obj.data5 = $('#data5').val()
+        obj.data6 = $('#data6').val()
+        let tmp = [] // Check checkbox
+        $('input[name="data7"]:checked').each((i,ele)=>{tmp.push($(ele).val())})
+        obj.data7 = tmp.join(',')
+        obj.data8 = $('#data8').val()
+        obj.data9 = $('#data9').val()
+        obj.data10 = $('#data10').val()
+        obj.data11 = $('#data11').val()
+        obj.data12 = $('#data12').val()
+        obj.data13 = $('#data13').val()
+
+        //File Upload Systme
+        var file = fileUploader.files[0]; 
+        if(file != undefined){
+        var reader = new FileReader(); //Reader
+        reader.readAsDataURL(file) //File Select
+        reader.onload = function() {         
+        obj.imagedata = reader.result.split(',')[1];  //File Select
+        obj.filename = file.name
+        obj.filetype = file.type
+        savedata(obj)
+          }}
+          else{savedata(obj)
+        }
+    }
+
+// Save Data
+    function savedata(obj){
+        google.script.run.withSuccessHandler(function (success) {
+          document.getElementById("myForm").reset()
+          $('#btn1').show()
+          $('#btn2').hide()
+          $('#form2').hide()
+          $('#form1').show()
+          $.LoadingOverlay("show", {image:"",fontawesome:"fa fa-cog fa-spin fa-xs"}); 
+           google.script.run.withSuccessHandler(showTable).getData();
+           $.LoadingOverlay("hide"); 
+            })
+            .saveData(obj);
+    }
+
+// Required checkbox Required
+    $(function(){
+    var checkboxes = $(':checkbox[required]');
+    checkboxes.change(function(){
+      if(checkboxes.is(':checked')) {
+          checkboxes.removeAttr('required');
+        }
+        else {
+          checkboxes.attr('required', 'required');
+        }
+    });
+});
+
+ function success(){
+  $('#form2').hide()
+  $([document.documentElement, document.body]).animate({
+    scrollTop: $('#form1').offset().top
+  },500)
+  $('#form1').show()
+  }
+
+
+
+function godatatable(){
+  $.LoadingOverlay("show", {image:"",fontawesome:"fa fa-cog fa-spin fa-xs"}); 
+  $('#form1').show()
+  $('#form2').hide()
+  $.LoadingOverlay("hide");  
+  google.script.run.withSuccessHandler(showTable).getData();
+
+}
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+</body>
+
+</html>
